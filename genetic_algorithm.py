@@ -108,3 +108,36 @@ def preencher_plano(plano, dimensao, CAIXAS):
     # fim while
 
     return plano
+
+def pegar_posicoes_iniciais(dimensao, numero_inicial):
+    posicoes = []
+    for _, v in enumerate(numero_inicial):
+        for i in range(dimensao):
+            for j in range(dimensao):
+                if i + v <= dimensao and j+v <= dimensao:
+                    posicao = {}
+                    posicao['caixa'] = v
+                    posicao['x'] = i
+                    posicao['y'] = j
+                    posicoes.append(posicao)
+
+    return posicoes
+
+def preencher_plano_inicial(dimensao, posicoes):
+    planos = []
+
+    for _, posicao in enumerate(posicoes):
+        plano = criar_plano(dimensao)
+
+        # preencher
+        preencher = False
+        count = 0
+        for i in range(posicao['caixa']):
+            for j in range(posicao['caixa']):
+                    x = posicao['x']+i
+                    y = posicao['y']+j
+                    plano[x][y] = posicao['caixa']
+        # fim for
+    # fim for
+
+    return

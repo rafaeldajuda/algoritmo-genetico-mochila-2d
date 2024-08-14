@@ -37,24 +37,40 @@ plano = criar_plano(dimensao)
 ### solução exata (força bruta)
 solucoes = []
 
-for _ in range(25000):
-    # preenchimento
-    plano = criar_plano(dimensao) 
-    novo_plano = preencher_plano(plano, dimensao, CAIXAS)
+# for _ in range(25000):
+#     # preenchimento
+#     plano = criar_plano(dimensao) 
+#     novo_plano = preencher_plano(plano, dimensao, CAIXAS)
 
-    print('Novo plano\n')
-    ver_plano(novo_plano, dimensao)
-    print()
+#     print('Novo plano\n')
+#     ver_plano(novo_plano, dimensao)
+#     print()
 
-    # guardar solução
-    solucao = []
-    for x in novo_plano:
-        for ponto in x:
-            solucao.append(ponto)
-    if solucao not in solucoes:
-        solucoes.append(solucao)
+#     # guardar solução
+#     solucao = []
+#     for x in novo_plano:
+#         for ponto in x:
+#             solucao.append(ponto)
+#     if solucao not in solucoes:
+#         solucoes.append(solucao)
 
-print(f'solucoes: {len(solucoes)}')
-print(solucoes)
+# print(f'solucoes: {len(solucoes)}')
+# print(solucoes)
+
+caixas = [1,2,3]
+numero_inicial = [3]
+print(f'numero_inicial: {numero_inicial}\n')
+ver_plano(plano, dimensao)
+
+posicoes_de_inicio = pegar_posicoes_iniciais(dimensao, numero_inicial)
+print()
+print(posicoes_de_inicio)
+plano_inicial = preencher_plano_inicial(dimensao, posicoes_de_inicio)
+
+def colocar_caixa(caixas, planos):
+    
+
+    return
+
 
 ### soluçao heurística
