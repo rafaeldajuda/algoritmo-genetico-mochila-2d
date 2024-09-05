@@ -1,6 +1,5 @@
-
-
-from genetic_algorithm import *
+from gen import *
+import copy
 
 # teste
 plano_teste_5 = [[1,1,3,3,3],
@@ -9,12 +8,12 @@ plano_teste_5 = [[1,1,3,3,3],
                  [0,0,1,2,2],
                  [0,0,0,2,2]]
 
-plano_teste_6 = [[1,1,2,2,2,2 ],
-               [0,0,2,2,2,2],
-               [0,0,0,0,0,0],
-               [0,0,0,0,0,0],
-               [0,0,0,0,0,0],
-               [0,0,0,0,0,0]]
+plano_teste_6 = [[1,1,2,2,2,2],
+                 [0,0,2,2,2,2],
+                 [0,0,0,0,0,0],
+                 [0,0,0,0,0,0],
+                 [0,0,0,0,0,0],
+                 [0,0,0,0,0,0]]
 
 ### definição do plano
 DIMENSAO_3X3 = 3
@@ -28,7 +27,7 @@ CAIXAS = {
     3 : 9
 }
 
-dimensao = DIMENSAO_4X4
+dimensao = DIMENSAO_3X3
 plano = criar_plano(dimensao) 
 # plano = plano_teste_5
 
@@ -58,19 +57,47 @@ solucoes = []
 # print(solucoes)
 
 caixas = [1,2,3]
-numero_inicial = [3]
-print(f'numero_inicial: {numero_inicial}\n')
-ver_plano(plano, dimensao)
-
-posicoes_de_inicio = pegar_posicoes_iniciais(dimensao, numero_inicial)
+ver_plano(plano)
 print()
-print(posicoes_de_inicio)
-plano_inicial = preencher_plano_inicial(dimensao, posicoes_de_inicio)
 
-def colocar_caixa(caixas, planos):
-    
+planos = []
 
-    return
+def teste(plano, caixas):
+    ver_plano(plano)
+    print()
+    for linha in range (len(plano)):
+        for coluna in range (len(plano[0])):
+
+            for _, caixa in enumerate(caixas):
+                print('caixa:', caixa)
+                print('linha:', linha)
+                print('coluna', coluna)
+                espaco = existe_espaco(caixa, plano, linha, coluna)
+                print('espaco', espaco)
+                if not espaco:
+                    continue
+
+                # preencher uma celula
+                novo_plano = copy.deepcopy(plano)
+                novo_plano = colocar_caixa(caixa, novo_plano, linha, coluna)
+                ver_plano(novo_plano)
+                print()
+                fim = plano_cheio(novo_plano)
+                if fim and novo_plano not in planos:
+                    print("plano_cheio:", fim)
+                    planos.append(novo_plano)
+                    return True
+                if len(planos) == 10:
+                    return True
+                teste(novo_plano, caixas)
+    return False
+            
+teste(plano, caixas)
+print(planos)
+
+print()
+print('solucoes')
+print(solucoes)
 
 
 ### soluçao heurística

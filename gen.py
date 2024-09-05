@@ -10,7 +10,7 @@ def criar_plano(dimensao):
     
     return plano
 
-def ver_plano(plano, dimensao):
+def ver_plano(plano):
     for i in plano:
         x = ''
         for j in i:
@@ -109,6 +109,14 @@ def preencher_plano(plano, dimensao, CAIXAS):
 
     return plano
 
+def existe_espaco(caixa, plano, linha, coluna):
+    for i in range(caixa):
+        for j in range(caixa):
+            if i+linha >= len(plano) or j+coluna >= len(plano[0]) or plano[i+linha][j+coluna] != 0:
+                return False
+            
+    return True
+
 def pegar_posicoes_iniciais(dimensao, numero_inicial):
     posicoes = []
     for _, v in enumerate(numero_inicial):
@@ -130,14 +138,34 @@ def preencher_plano_inicial(dimensao, posicoes):
         plano = criar_plano(dimensao)
 
         # preencher
-        preencher = False
-        count = 0
         for i in range(posicao['caixa']):
             for j in range(posicao['caixa']):
                     x = posicao['x']+i
                     y = posicao['y']+j
                     plano[x][y] = posicao['caixa']
         # fim for
+
+        planos.append(plano)
     # fim for
 
-    return
+    return planos
+
+def colocar_caixa(caixa, p, linha, coluna):
+    for i in range(caixa):
+        for j in range(caixa):
+            p[i+linha][j+coluna] = caixa
+
+    return p
+
+
+def plano_cheio(plano):
+    # checa se todo plano foi preenchido
+    count_zeros = 0
+    for x in plano:
+        if x.count(0) == 0:
+            count_zeros = count_zeros + 1
+    if count_zeros == len(plano):
+        return True
+    return False
+
+
