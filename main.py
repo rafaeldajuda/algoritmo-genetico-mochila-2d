@@ -27,7 +27,7 @@ CAIXAS = {
     3 : 9
 }
 
-dimensao = DIMENSAO_3X3
+dimensao = DIMENSAO_4X4
 plano = criar_plano(dimensao) 
 # plano = plano_teste_5
 
@@ -43,10 +43,14 @@ print()
 planos = []
 
 print(datetime.datetime.now())
-preencher_planos(plano, caixas, planos)
+preencher_planos(plano, caixas, 0, 0, planos)
 print(datetime.datetime.now())
 print(planos)
 print(len(planos))
+
+# for p in range (len(planos)):
+#     ver_plano(planos[p])
+#     print()
 
 print()
 print('solucoes')

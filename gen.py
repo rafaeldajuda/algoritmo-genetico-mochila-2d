@@ -169,33 +169,35 @@ def plano_cheio(plano):
         return True
     return False
 
-def preencher_planos(plano, caixas, planos):
-    ver_plano(plano)
-    print()
+def preencher_planos(plano, caixas, x, y, planos):
+    # ver_plano(plano)
+    # print()
     for linha in range (len(plano)):
         for coluna in range (len(plano[0])):
+            # if plano[linha][coluna] != 0:
+            #     continue
 
             for _, caixa in enumerate(caixas):
-                print('caixa:', caixa)
-                print('linha:', linha)
-                print('coluna', coluna)
-                espaco = existe_espaco(caixa, plano, linha, coluna)
-                print('espaco', espaco)
+                # print('caixa:', caixa)
+                # print('linha:', linha)
+                # print('coluna', coluna)
+                espaco = existe_espaco(caixa, plano, linha+x, coluna+y)
+                # print('espaco', espaco)
                 if not espaco:
                     continue
 
                 # preencher uma celula
                 novo_plano = copy.deepcopy(plano)
-                novo_plano = colocar_caixa(caixa, novo_plano, linha, coluna)
-                ver_plano(novo_plano)
-                print()
+                novo_plano = colocar_caixa(caixa, novo_plano, linha+x, coluna+y)
+                # ver_plano(novo_plano)
+                # print()
                 fim = plano_cheio(novo_plano)
                 if fim and novo_plano not in planos:
-                    print("plano_cheio:", fim)
+                    # print("plano_cheio:", fim)
                     planos.append(novo_plano)
                     return True
-                if len(planos) == 10:
+                if len(planos) == 15:
                     return True
-                preencher_planos(novo_plano, caixas, planos)
+                preencher_planos(novo_plano, caixas, linha, coluna, planos)
     return False
 
