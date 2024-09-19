@@ -1,5 +1,5 @@
 from gen import *
-import copy
+import datetime
 
 # teste
 plano_teste_5 = [[1,1,3,3,3],
@@ -36,64 +36,17 @@ plano = criar_plano(dimensao)
 ### solução exata (força bruta)
 solucoes = []
 
-# for _ in range(25000):
-#     # preenchimento
-#     plano = criar_plano(dimensao) 
-#     novo_plano = preencher_plano(plano, dimensao, CAIXAS)
-
-#     print('Novo plano\n')
-#     ver_plano(novo_plano, dimensao)
-#     print()
-
-#     # guardar solução
-#     solucao = []
-#     for x in novo_plano:
-#         for ponto in x:
-#             solucao.append(ponto)
-#     if solucao not in solucoes:
-#         solucoes.append(solucao)
-
-# print(f'solucoes: {len(solucoes)}')
-# print(solucoes)
-
 caixas = [1,2,3]
 ver_plano(plano)
 print()
 
 planos = []
 
-def teste(plano, caixas):
-    ver_plano(plano)
-    print()
-    for linha in range (len(plano)):
-        for coluna in range (len(plano[0])):
-
-            for _, caixa in enumerate(caixas):
-                print('caixa:', caixa)
-                print('linha:', linha)
-                print('coluna', coluna)
-                espaco = existe_espaco(caixa, plano, linha, coluna)
-                print('espaco', espaco)
-                if not espaco:
-                    continue
-
-                # preencher uma celula
-                novo_plano = copy.deepcopy(plano)
-                novo_plano = colocar_caixa(caixa, novo_plano, linha, coluna)
-                ver_plano(novo_plano)
-                print()
-                fim = plano_cheio(novo_plano)
-                if fim and novo_plano not in planos:
-                    print("plano_cheio:", fim)
-                    planos.append(novo_plano)
-                    return True
-                if len(planos) == 10:
-                    return True
-                teste(novo_plano, caixas)
-    return False
-            
-teste(plano, caixas)
+print(datetime.datetime.now())
+preencher_planos(plano, caixas, planos)
+print(datetime.datetime.now())
 print(planos)
+print(len(planos))
 
 print()
 print('solucoes')
