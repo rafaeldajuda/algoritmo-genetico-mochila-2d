@@ -1,3 +1,4 @@
+import os
 import random
 import copy
 
@@ -110,6 +111,13 @@ def preencher_plano(plano, dimensao, CAIXAS):
 
     return plano
 
+# NAO USAR
+def contar_zeros(plano):
+    zeros = 0
+    for linha in plano:
+        zeros += linha.count(0)
+    return zeros
+
 def existe_espaco(caixa, plano, linha, coluna):
     for i in range(caixa):
         for j in range(caixa):
@@ -170,6 +178,8 @@ def plano_cheio(plano):
     return False
 
 def preencher_planos(plano, caixas, x, y, planos):
+    # os.system('clear')
+    # print("n: ", len(planos))
     # ver_plano(plano)
     # print()
     for linha in range (len(plano)):
@@ -195,7 +205,6 @@ def preencher_planos(plano, caixas, x, y, planos):
                 if fim and novo_plano not in planos:
                     # print("plano_cheio:", fim)
                     planos.append(novo_plano)
-                    return True
                 if len(planos) == 15:
                     return True
                 preencher_planos(novo_plano, caixas, linha, coluna, planos)
